@@ -143,10 +143,11 @@ class Pipeline:
 
         # ── 2. Специализированные стандартные модели ──────────────────────────
         spec = [
-            ("water",    "water",    CLASS_ID["water"]),
-            ("forest",   "forest",   CLASS_ID["forest"]),
             ("building", "building", CLASS_ID["building"]),
+            ("forest",   "forest",   CLASS_ID["forest"]),
             ("road",     "road",     CLASS_ID["road"]),
+            ("water",    "water",    CLASS_ID["water"]),
+
         ]
 
         for lulc_name, model_key, class_id in spec:
