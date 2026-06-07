@@ -1,0 +1,32 @@
+services:
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    # порт НЕ пробрасываем наружу — только внутри docker-сети
+    expose:
+      - "8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    # volumes:
+    #   - ./backend:/app  # раскомментить для dev hot-reload
+
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    expose:
+      - "80"    # для prod
+      # - "5173"  # для dev
+    depends_on:
+      - backend
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"      # единственный открытый порт снаружи
+      # - "443:443"  # если нужен https
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - backend
+      - frontend
