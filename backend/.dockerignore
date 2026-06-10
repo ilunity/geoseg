@@ -1,9 +1,6 @@
-node_modules/
 __pycache__/
 *.pyc
 venv/
-dist/
-build/
+.git/
 .idea/
 .vscode/
-.env

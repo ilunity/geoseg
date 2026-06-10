@@ -7,14 +7,15 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
     volumes:
-      - ./backend/checkpoints:/app/checkpoints
+      - checkpoints-data:/app/checkpoints
 
   frontend:
     build: ./frontend
     restart: unless-stopped
     expose:
       - "80"
-    environment:
-      - VITE_API_URL=http://backend:8000
     depends_on:
       - backend
+
+volumes:
+  checkpoints-data:
