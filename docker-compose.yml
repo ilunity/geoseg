@@ -8,6 +8,8 @@ services:
       - PYTHONUNBUFFERED=1
     volumes:
       - checkpoints-data:/app/checkpoints
+    networks:
+      - geoseg-network
 
   frontend:
     build: ./frontend
@@ -16,6 +18,12 @@ services:
       - "80"
     depends_on:
       - backend
+    networks:
+      - geoseg-network
 
 volumes:
   checkpoints-data:
+
+networks:
+  geoseg-network:
+    driver: bridge
